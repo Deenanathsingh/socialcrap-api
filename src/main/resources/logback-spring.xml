@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="FILE"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/socialcrap_default.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>log/socialcrap_default-%d{yyyy-MM-dd}.%i.log.gz
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>512MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>15</maxHistory>
+		</rollingPolicy>
+
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35}
+				[%X{userEmail}] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<appender name="socialcrap"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>log/ratson_log.log</file>
+		<rollingPolicy
+			class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>logs/socialcrap_log-%d{yyyy-MM-dd}.%i.log.gz
+			</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>512MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>15</maxHistory>
+		</rollingPolicy>
+		<encoder>
+			<pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35}
+				[%X{userEmail}] - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<logger name="com.socialcrap.api" additivity="false"
+		level="DEBUG">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</logger>
+
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+		<!-- <appender-ref ref="FILE" /> -->
+	</root>
+
+</configuration>
